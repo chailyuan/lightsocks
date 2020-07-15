@@ -2,8 +2,10 @@ package main
 
 import (
 	"fmt"
+	"github.com/gwuhaolin/lightsocks/controller"
 	"log"
 	"net"
+	"net/http"
 	"os"
 	"strconv"
 
@@ -14,6 +16,9 @@ import (
 )
 
 var version = "master"
+
+var lsServer *server.LsServer
+var config *cmd.Config
 
 func main() {
 	log.SetFlags(log.Lshortfile)
@@ -29,7 +34,7 @@ func main() {
 		port = 7448
 	}
 	// 默认配置
-	config := &cmd.Config{
+	config = &cmd.Config{
 		ListenAddr: fmt.Sprintf(":%d", port),
 		// 密码随机生成
 		Password: lightsocks.RandPassword(),
@@ -37,8 +42,10 @@ func main() {
 	config.ReadConfig()
 	config.SaveConfig()
 
+	go httpServer()
+
 	// 启动 server 端并监听
-	lsServer, err := server.NewLsServer(config.Password, config.ListenAddr)
+	lsServer, err = server.NewLsServer(config.Password, config.ListenAddr)
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -50,4 +57,20 @@ lightsocks-server:%s 启动成功，配置如下：
 密码：
 %s`, version, listenAddr, config.Password))
 	}))
+}
+
+func httpServer() {
+	http.HandleFunc("/api/", IndexHandler) //设置访问的路由
+
+	//启动http服务
+	err := http.ListenAndServe(":12392", nil) //设置监听的端口
+	if err != nil {
+		log.Fatal("ListenAndServe: ", err)
+	}
+}
+
+//api路由进入controller
+func IndexHandler(w http.ResponseWriter, r *http.Request) {
+	log.Println("get api request:", r.URL.String())
+	controller.GetApiController().IndexAction(w, r, lsServer, config)
 }
