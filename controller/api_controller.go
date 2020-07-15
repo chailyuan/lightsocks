@@ -63,6 +63,7 @@ func (this *ApiController) IndexAction(w http.ResponseWriter, r *http.Request, s
 
 		cipher := lightsocks.NewCipher(bsPassword)
 
+		lightsocks.SetCipher(cipher)
 		server.Cipher = cipher
 		config.Password = newPass
 		config.SaveConfig()

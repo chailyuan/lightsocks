@@ -10,6 +10,12 @@ const (
 	bufSize = 1024
 )
 
+var cipher *Cipher
+
+func SetCipher(c *Cipher) {
+	cipher = c
+}
+
 // 加密传输的 TCP Socket
 type SecureTCPConn struct {
 	io.ReadWriteCloser
@@ -99,7 +105,7 @@ func DialEncryptedTCP(raddr *net.TCPAddr, cipher *Cipher) (*SecureTCPConn, error
 }
 
 // see net.ListenTCP
-func ListenEncryptedTCP(laddr *net.TCPAddr, cipher *Cipher, handleConn func(localConn *SecureTCPConn), didListen func(listenAddr *net.TCPAddr)) error {
+func ListenEncryptedTCP(laddr *net.TCPAddr, handleConn func(localConn *SecureTCPConn), didListen func(listenAddr *net.TCPAddr)) error {
 	listener, err := net.ListenTCP("tcp", laddr)
 	if err != nil {
 		return err

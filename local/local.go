@@ -41,7 +41,8 @@ func NewLsLocal(password string, listenAddr, remoteAddr string) (*LsLocal, error
 
 // 本地端启动监听，接收来自本机浏览器的连接
 func (local *LsLocal) Listen(didListen func(listenAddr *net.TCPAddr)) error {
-	return lightsocks.ListenEncryptedTCP(local.ListenAddr, local.Cipher, local.handleConn, didListen)
+	lightsocks.SetCipher(local.Cipher)
+	return lightsocks.ListenEncryptedTCP(local.ListenAddr, local.handleConn, didListen)
 }
 
 func (local *LsLocal) handleConn(userConn *lightsocks.SecureTCPConn) {

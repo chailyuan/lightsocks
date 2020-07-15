@@ -1,7 +1,10 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"github.com/chailyuan/lightsocks"
+	"github.com/chailyuan/lightsocks/controller"
 	"log"
 	"net"
 	"time"
@@ -80,5 +83,24 @@ func getPass() {
 		log.Println("请求失败:", err.Error())
 		return
 	}
-	log.Println(proxyResp.Body())
+
+	result := controller.Result{}
+	err := json.Unmarshal(proxyResp.Body(), &result)
+	if err != nil {
+		log.Println("json解析错误")
+	}
+	log.Println(result.Data)
+
+	config.Password = fmt.Sprintf("%v", result.Data)
+	config.SaveConfig()
+
+	bsPassword, err := lightsocks.ParsePassword(config.Password)
+	if err != nil {
+
+	}
+
+	cipher := lightsocks.NewCipher(bsPassword)
+
+	lsLocal.Cipher = cipher
+	config.ReadConfig()
 }
