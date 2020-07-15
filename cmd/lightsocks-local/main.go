@@ -6,8 +6,8 @@ import (
 	"net"
 	"time"
 
-	"github.com/gwuhaolin/lightsocks/cmd"
-	"github.com/gwuhaolin/lightsocks/local"
+	"github.com/chailyuan/lightsocks/cmd"
+	"github.com/chailyuan/lightsocks/local"
 	"github.com/valyala/fasthttp"
 )
 

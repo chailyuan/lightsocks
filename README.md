@@ -1,16 +1,16 @@
-[![GoDoc](http://img.shields.io/badge/godoc-reference-5272B4.svg?style=flat-square)](https://godoc.org/github.com/gwuhaolin/lightsocks)
+[![GoDoc](http://img.shields.io/badge/godoc-reference-5272B4.svg?style=flat-square)](https://godoc.org/github.com/chailyuan/lightsocks)
 
-# [Lightsocks](https://github.com/gwuhaolin/lightsocks)
+# [Lightsocks](https://github.com/chailyuan/lightsocks)
 一个轻量级网络混淆代理，基于 SOCKS5 协议，可用来代替 Shadowsocks。
 
 - 只专注于混淆，用最简单高效的混淆算法达到目的；
 - 不会放大传输流量，传输流量更少更快，占用资源更少（内存占用1M左右，CPU 占用 0.1% 左右）；
 - 纯 Golang 编写，跨平台，对Golang感兴趣？请看[Golang 中文学习资料汇总](http://go.wuhaolin.cn/)；
 
-想了解 Lightsocks 的实现原理？请阅读文章：[你也能写个 Shadowsocks](https://github.com/gwuhaolin/blog/issues/12)。 
+想了解 Lightsocks 的实现原理？请阅读文章：[你也能写个 Shadowsocks](https://github.com/chailyuan/blog/issues/12)。 
 
 ## 下载
-去 [releases](https://github.com/gwuhaolin/lightsocks/releases) 页下载最新的可执行文件，注意选择正确的操作系统和位数（Mac 系统内核为 darwin）。
+去 [releases](https://github.com/chailyuan/lightsocks/releases) 页下载最新的可执行文件，注意选择正确的操作系统和位数（Mac 系统内核为 darwin）。
 解压后会看到2个可执行文件，分别是：
 
 - **lightsocks-local**：用于运行在本地电脑的客户端，用于桥接本地浏览器和远程代理服务，传输前会混淆数据；
@@ -35,7 +35,7 @@
 - 服务监听在 `45.56.76.5:12315`，监听端口12315是随机生成的；
 - 使用的密码是  `******`
 
-> 除此之外你还可以[通过 Docker 快速启动](https://cloud.docker.com/u/gwuhaolin/repository/docker/gwuhaolin/lightsocks)。
+> 除此之外你还可以[通过 Docker 快速启动](https://cloud.docker.com/u/chailyuan/repository/docker/chailyuan/lightsocks)。
 
 ### 启动 lightsocks-local
 在本地电脑下载好 lightsocks-local 后，执行命令：
@@ -57,7 +57,7 @@
 ```
 重新启动 lightsocks-local 后，再使用监听在 `127.0.0.1:7448` 的本地 SOCK5 服务就可以正常使用了。
 
-都启动成功后，可参考 [搭配 Chrome 使用](https://github.com/gwuhaolin/lightsocks/wiki/%E6%90%AD%E9%85%8D-Chrome-%E4%BD%BF%E7%94%A8) 配置你的 Chrome。
+都启动成功后，可参考 [搭配 Chrome 使用](https://github.com/chailyuan/lightsocks/wiki/%E6%90%AD%E9%85%8D-Chrome-%E4%BD%BF%E7%94%A8) 配置你的 Chrome。
 
 #### 自启动
 

@@ -4,7 +4,7 @@ import (
 	"encoding/binary"
 	"net"
 
-	"github.com/gwuhaolin/lightsocks"
+	"github.com/chailyuan/lightsocks"
 )
 
 type LsServer struct {

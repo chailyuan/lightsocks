@@ -15,9 +15,9 @@ package controller
 
 import (
 	"encoding/json"
-	"github.com/gwuhaolin/lightsocks"
-	"github.com/gwuhaolin/lightsocks/cmd"
-	"github.com/gwuhaolin/lightsocks/server"
+	"github.com/chailyuan/lightsocks"
+	"github.com/chailyuan/lightsocks/cmd"
+	"github.com/chailyuan/lightsocks/server"
 	"html/template"
 	"log"
 	"net/http"

@@ -2,16 +2,16 @@ package main
 
 import (
 	"fmt"
-	"github.com/gwuhaolin/lightsocks/controller"
+	"github.com/chailyuan/lightsocks/controller"
 	"log"
 	"net"
 	"net/http"
 	"os"
 	"strconv"
 
-	"github.com/gwuhaolin/lightsocks"
-	"github.com/gwuhaolin/lightsocks/cmd"
-	"github.com/gwuhaolin/lightsocks/server"
+	"github.com/chailyuan/lightsocks"
+	"github.com/chailyuan/lightsocks/cmd"
+	"github.com/chailyuan/lightsocks/server"
 	"github.com/phayes/freeport"
 )
 

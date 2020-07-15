@@ -8,9 +8,9 @@ import (
 	"os"
 	"time"
 
+	"github.com/chailyuan/lightsocks/local"
 	"github.com/eycorsican/go-tun2socks/core"
 	"github.com/eycorsican/go-tun2socks/proxy/socks"
-	"github.com/gwuhaolin/lightsocks/local"
 )
 
 const listenAddr = "127.0.0.1:0"

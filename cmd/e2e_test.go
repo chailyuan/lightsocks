@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/gwuhaolin/lightsocks"
-	"github.com/gwuhaolin/lightsocks/local"
-	"github.com/gwuhaolin/lightsocks/server"
+	"github.com/chailyuan/lightsocks"
+	"github.com/chailyuan/lightsocks/local"
+	"github.com/chailyuan/lightsocks/server"
 	"golang.org/x/net/proxy"
 )
 
