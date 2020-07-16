@@ -96,12 +96,10 @@ func getPass() {
 
 	bsPassword, err := lightsocks.ParsePassword(config.Password)
 	if err != nil {
-
+		return
 	}
 
 	cipher := lightsocks.GetInstance()
 	cipher.SetPassword(bsPassword)
 
-	lsLocal.Cipher = cipher
-	config.ReadConfig()
 }

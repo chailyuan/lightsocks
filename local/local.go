@@ -8,7 +8,6 @@ import (
 )
 
 type LsLocal struct {
-	Cipher     *lightsocks.Cipher
 	ListenAddr *net.TCPAddr
 	RemoteAddr *net.TCPAddr
 }
@@ -35,7 +34,6 @@ func NewLsLocal(password string, listenAddr, remoteAddr string) (*LsLocal, error
 	cipher := lightsocks.GetInstance()
 	cipher.SetPassword(bsPassword)
 	return &LsLocal{
-		Cipher:     cipher,
 		ListenAddr: structListenAddr,
 		RemoteAddr: structRemoteAddr,
 	}, nil
@@ -49,7 +47,7 @@ func (local *LsLocal) Listen(didListen func(listenAddr *net.TCPAddr)) error {
 func (local *LsLocal) handleConn(userConn *lightsocks.SecureTCPConn) {
 	defer userConn.Close()
 
-	proxyServer, err := lightsocks.DialEncryptedTCP(local.RemoteAddr, local.Cipher)
+	proxyServer, err := lightsocks.DialEncryptedTCP(local.RemoteAddr, lightsocks.GetInstance())
 	if err != nil {
 		log.Println(err)
 		return
