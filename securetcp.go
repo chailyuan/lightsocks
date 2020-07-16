@@ -10,12 +10,6 @@ const (
 	bufSize = 1024
 )
 
-var cipher *Cipher
-
-func SetCipher(c *Cipher) {
-	cipher = c
-}
-
 // 加密传输的 TCP Socket
 type SecureTCPConn struct {
 	io.ReadWriteCloser
@@ -127,7 +121,7 @@ func ListenEncryptedTCP(laddr *net.TCPAddr, handleConn func(localConn *SecureTCP
 		localConn.SetLinger(0)
 		go handleConn(&SecureTCPConn{
 			ReadWriteCloser: localConn,
-			Cipher:          cipher,
+			Cipher:          GetInstance(),
 		})
 	}
 }

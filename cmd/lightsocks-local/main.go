@@ -99,7 +99,8 @@ func getPass() {
 
 	}
 
-	cipher := lightsocks.NewCipher(bsPassword)
+	cipher := lightsocks.GetInstance()
+	cipher.SetPassword(bsPassword)
 
 	lsLocal.Cipher = cipher
 	config.ReadConfig()

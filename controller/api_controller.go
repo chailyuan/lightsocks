@@ -61,10 +61,9 @@ func (this *ApiController) IndexAction(w http.ResponseWriter, r *http.Request, s
 			OutputJson(w, 0, "ok", "解析密码异常")
 		}
 
-		cipher := lightsocks.NewCipher(bsPassword)
+		cipher := lightsocks.GetInstance()
+		cipher.SetPassword(bsPassword)
 
-		lightsocks.SetCipher(cipher)
-		server.Cipher = cipher
 		config.Password = newPass
 		config.SaveConfig()
 

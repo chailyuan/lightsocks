@@ -32,8 +32,10 @@ func NewLsLocal(password string, listenAddr, remoteAddr string) (*LsLocal, error
 	if err != nil {
 		return nil, err
 	}
+	cipher := lightsocks.GetInstance()
+	cipher.SetPassword(bsPassword)
 	return &LsLocal{
-		Cipher:     lightsocks.NewCipher(bsPassword),
+		Cipher:     cipher,
 		ListenAddr: structListenAddr,
 		RemoteAddr: structRemoteAddr,
 	}, nil
@@ -41,7 +43,6 @@ func NewLsLocal(password string, listenAddr, remoteAddr string) (*LsLocal, error
 
 // 本地端启动监听，接收来自本机浏览器的连接
 func (local *LsLocal) Listen(didListen func(listenAddr *net.TCPAddr)) error {
-	lightsocks.SetCipher(local.Cipher)
 	return lightsocks.ListenEncryptedTCP(local.ListenAddr, local.handleConn, didListen)
 }
 

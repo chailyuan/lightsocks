@@ -8,7 +8,6 @@ import (
 )
 
 type LsServer struct {
-	Cipher     *lightsocks.Cipher
 	ListenAddr *net.TCPAddr
 }
 
@@ -26,8 +25,9 @@ func NewLsServer(password string, listenAddr string) (*LsServer, error) {
 	if err != nil {
 		return nil, err
 	}
+	cipher := lightsocks.GetInstance()
+	cipher.SetPassword(bsPassword)
 	return &LsServer{
-		Cipher:     lightsocks.NewCipher(bsPassword),
 		ListenAddr: structListenAddr,
 	}, nil
 
@@ -35,7 +35,6 @@ func NewLsServer(password string, listenAddr string) (*LsServer, error) {
 
 // 运行服务端并且监听来自本地代理客户端的请求
 func (lsServer *LsServer) Listen(didListen func(listenAddr *net.TCPAddr)) error {
-	lightsocks.SetCipher(lsServer.Cipher)
 	return lightsocks.ListenEncryptedTCP(lsServer.ListenAddr, lsServer.handleConn, didListen)
 }
 
